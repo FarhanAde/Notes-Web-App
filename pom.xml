@@ -34,6 +34,12 @@
         <configuration>
           <outputDirectory>${basedir}/war-file/</outputDirectory>
           <warName>notes-app</warName>
+          <archive>
+            <manifest>
+              <mainClass>uk.ac.ucl.main.Main</mainClass>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
       <plugin>
@@ -106,6 +112,15 @@
             <argument>${main.class}</argument>
           </arguments>
           <workingDirectory>${project.basedir}</workingDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <port>8080</port>
+          <path>/</path>
         </configuration>
       </plugin>
     </plugins>
