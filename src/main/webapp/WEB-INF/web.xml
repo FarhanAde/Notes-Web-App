@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>Notes Application</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+
+    <listener>
+        <listener-class>uk.ac.ucl.servlets.ApplicationContextListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>NotesServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.NotesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NotesServlet</servlet-name>
+        <url-pattern>/notes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewNoteServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.ViewNoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewNoteServlet</servlet-name>
+        <url-pattern>/viewNote</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateNoteServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.CreateNoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateNoteServlet</servlet-name>
+        <url-pattern>/createNote</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditNoteServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.EditNoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditNoteServlet</servlet-name>
+        <url-pattern>/editNote</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteNoteServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.DeleteNoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteNoteServlet</servlet-name>
+        <url-pattern>/deleteNote</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.CategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/category</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewCategoryServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.ViewCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewCategoryServlet</servlet-name>
+        <url-pattern>/viewCategory</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ManageNoteCategoriesServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.ManageNoteCategoriesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageNoteCategoriesServlet</servlet-name>
+        <url-pattern>/manageNoteCategories</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>uk.ac.ucl.servlets.DeleteCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/deleteCategory</url-pattern>
+    </servlet-mapping>
+
+</web-app> 
