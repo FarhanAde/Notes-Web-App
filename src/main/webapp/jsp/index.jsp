@@ -76,11 +76,53 @@
         .button.edit:hover {
             background-color: #1976D2;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin-left: 20px;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        .search-form input[type="text"] {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .search-form button {
+            padding: 8px 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .search-form button:hover {
+            background-color: #357abd;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Notes Application</h1>
+        <div class="header">
+            <h1>Notes Application</h1>
+            <div class="search-container">
+                <form action="search" method="GET" class="search-form">
+                    <input type="text" name="query" placeholder="Search notes..." required>
+                    <button type="submit" class="button">Search</button>
+                </form>
+            </div>
+        </div>
         
         <div class="section">
             <h2>Notes</h2>

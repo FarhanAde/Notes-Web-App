@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Search Results</title>
+    <title>Search Results - Notes Application</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,25 +16,34 @@
             background-color: #f5f5f5;
         }
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             background-color: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #333;
-            margin-top: 0;
-        }
-        .search-form {
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin-left: 20px;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
         .search-form input[type="text"] {
-            padding: 8px;
-            width: 300px;
+            flex: 1;
+            padding: 8px 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 14px;
         }
         .search-form button {
             padding: 8px 16px;
@@ -43,63 +52,103 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 14px;
+        }
+        .search-form button:hover {
+            background-color: #357abd;
+        }
+        h1 {
+            color: #333;
+            margin: 0;
         }
         .results-info {
-            margin-bottom: 20px;
+            margin: 20px 0;
             color: #666;
+            font-size: 16px;
         }
-        .results-list {
-            list-style-type: none;
+        .list {
+            list-style: none;
             padding: 0;
         }
-        .result-item {
+        .list-item {
             padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #eee;
-            border-radius: 4px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .result-title {
-            font-size: 1.2em;
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .note-content {
+            flex: 1;
+        }
+        .note-title {
+            font-size: 18px;
+            color: #1a0dab;
             margin-bottom: 5px;
         }
-        .result-title a {
-            color: #4285f4;
+        .note-title a {
+            color: #1a0dab;
             text-decoration: none;
         }
-        .result-title a:hover {
+        .note-title a:hover {
             text-decoration: underline;
         }
-        .result-match {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #333;
+        .note-summary {
+            color: #4d5156;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .match-context {
+            color: #666;
+            font-size: 13px;
+            font-style: italic;
         }
         .highlight {
             background-color: #fff2a8;
             padding: 2px;
         }
         .actions {
-            margin-top: 20px;
+            display: flex;
+            gap: 10px;
         }
-        .actions a {
-            display: inline-block;
+        .button {
             padding: 8px 16px;
-            background-color: #4285f4;
-            color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .button.view {
+            background-color: #2196F3;
+        }
+        .button.view:hover {
+            background-color: #1976D2;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Search Results</h1>
-        
-        <div class="search-form">
-            <form action="search" method="GET">
-                <input type="text" name="query" value="${param.query}" placeholder="Search notes..." required>
-                <button type="submit">Search</button>
-            </form>
+        <div class="header">
+            <h1>Search Results</h1>
+            <div class="search-container">
+                <form action="search" method="GET" class="search-form">
+                    <input type="text" name="query" value="${param.query}" placeholder="Search notes..." required>
+                    <button type="submit" class="button">Search</button>
+                </form>
+            </div>
         </div>
         
         <% 
@@ -112,32 +161,35 @@
                 Found <%= searchResults.size() %> results for "<%= query %>"
             </div>
             
-            <ul class="results-list">
+            <ul class="list">
                 <% for (SearchResult result : searchResults) { %>
-                    <li class="result-item">
-                        <div class="result-title">
-                            <a href="viewNote?id=<%= result.getNote().getId() %>"><%= result.getNote().getName() %></a>
-                        </div>
-                        <div>
-                            <span><%= result.getNote().getSummary() %></span>
-                        </div>
-                        <% if (result.getMatchContext() != null && !result.getMatchContext().isEmpty()) { %>
-                            <div class="result-match">
-                                <%= result.getMatchContext().replace(query, "<span class='highlight'>" + query + "</span>") %>
+                    <li class="list-item">
+                        <div class="note-content">
+                            <div class="note-title">
+                                <a href="viewNote?id=<%= result.getNote().getId() %>">
+                                    <%= result.getNote().getName() %>
+                                </a>
                             </div>
-                        <% } %>
+                            <div class="note-summary">
+                                <%= result.getNote().getSummary() %>
+                            </div>
+                            <% if (result.getMatchContext() != null && !result.getMatchContext().isEmpty()) { %>
+                                <div class="match-context">
+                                    <%= result.getMatchContext().replace(query, "<span class='highlight'>" + query + "</span>") %>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="actions">
+                            <a href="viewNote?id=<%= result.getNote().getId() %>" class="button view">View</a>
+                        </div>
                     </li>
                 <% } %>
             </ul>
-        <% } else { %>
-            <div class="results-info">
+        <% } else if (query != null && !query.isEmpty()) { %>
+            <div class="no-results">
                 No results found for "<%= query %>". Try a different search term.
             </div>
         <% } %>
-        
-        <div class="actions">
-            <a href="index">Back to Index</a>
-        </div>
     </div>
 </body>
 </html> 
